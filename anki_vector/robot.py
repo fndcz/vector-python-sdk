@@ -742,7 +742,7 @@ class Robot:
         self.conn.close()
 
     def __enter__(self):
-        self.connect(self.behavior_activation_timeout)
+        self.connect(self.behavior_activation_timeout, self._take_control)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
