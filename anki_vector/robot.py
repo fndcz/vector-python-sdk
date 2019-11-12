@@ -121,7 +121,8 @@ class Robot:
                  enable_nav_map_feed: bool = None,
                  show_viewer: bool = False,
                  show_3d_viewer: bool = False,
-                 behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY):
+                 behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY,
+                 take_control: bool = True):
         if default_logging:
             util.setup_basic_logging()
         self.logger = util.get_class_logger(__name__, self)
@@ -152,6 +153,8 @@ class Robot:
         #: :class:`anki_vector.connection.Connection`: The active connection to the robot.
         self._conn = Connection(self._name, ':'.join([self._ip, self._port]), self._cert_file, self._guid, behavior_control_level=behavior_control_level)
         self._events = events.EventHandler(self)
+        
+        self._take_control = take_control
 
         # placeholders for components before they exist
         self._anim: animation.AnimationComponent = None
